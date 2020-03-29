@@ -1,0 +1,9 @@
+com\bookStore\restCrud\dao\BookDaoImp.class
+com\bookStore\restCrud\controller\BookController.class
+com\bookStore\restCrud\model\Book.class
+com\bookStore\restCrud\service\BookService.class
+com\bookStore\restCrud\config\MyWebConfig.class
+com\bookStore\restCrud\config\MyHibernateConfig.class
+com\bookStore\restCrud\dao\BookDao.class
+com\bookStore\restCrud\service\BookServiceImp.class
+com\bookStore\restCrud\config\ServletInitializer.class
