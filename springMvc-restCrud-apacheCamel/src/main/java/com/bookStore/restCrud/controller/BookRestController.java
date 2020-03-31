@@ -38,7 +38,7 @@ public class BookRestController {
    @RequestMapping(value = "/book", method = RequestMethod.POST)
    public ResponseEntity<?> save(@RequestBody Book book) {
       long id = bookService.save(book);
-      return ResponseEntity.ok().body("New Book has been saved with ID:" + id);
+      return ResponseEntity.ok().body("New Book saved with ID:" + id);
    }
 
    /*---get a book by id---*/
