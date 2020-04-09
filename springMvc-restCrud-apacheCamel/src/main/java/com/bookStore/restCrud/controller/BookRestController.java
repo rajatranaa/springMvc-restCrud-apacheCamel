@@ -4,8 +4,12 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.camel.CamelContext;
+import org.apache.camel.ProducerTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.ResponseEntity.BodyBuilder;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,14 +23,18 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.bookStore.restCrud.model.Book;
 import com.bookStore.restCrud.service.BookService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 @RestController
 public class BookRestController {
 
    @Autowired
    private BookService bookService;
+   
+	@Autowired
+	CamelContext camelContext;
 
-   /*---Home page---*/
+   //Home page
    @RequestMapping(value = "/")
 	public ModelAndView homePage(HttpServletRequest request) {
 		ModelAndView model = new ModelAndView();
@@ -34,37 +42,62 @@ public class BookRestController {
 		return model;
 	}
    
-   /*---Add new book---*/
+   //Add new book
    @RequestMapping(value = "/book", method = RequestMethod.POST)
-   public ResponseEntity<?> save(@RequestBody Book book) {
-      long id = bookService.save(book);
-      return ResponseEntity.ok().body("New Book saved with ID:" + id);
+   public ResponseEntity<HttpStatus> save(@RequestBody Book book, HttpServletRequest req) throws Exception{
+	   ProducerTemplate pt = camelContext.createProducerTemplate();
+	   System.out.println("Creating Switch...");
+		String destination = "direct:cm.create";
+		System.out.println("Send message to " + destination);
+		
+		ObjectMapper mapper = new ObjectMapper();
+		String jsonString = mapper.writeValueAsString(book);
+		System.out.println(jsonString);
+		
+	//	pt.sendBody(destination, jsonString);
+		pt.sendBody(destination, book);
+		return ResponseEntity.ok(HttpStatus.OK);
+		
+   //   long id = bookService.save(book);
+   //   return ResponseEntity.ok().body("New Book saved with ID:" + id);
    }
 
-   /*---get a book by id---*/
+  /* @RequestMapping(value = "switch", method = RequestMethod.POST)
+	public ResponseEntity<HttpStatus> createSwitch(@RequestBody Switch body, HttpServletRequest req) {
+		ProducerTemplate pt = camelContext.createProducerTemplate();
+		System.out.println("Creating Switch...");
+		String destination = "direct:cm.create";
+		System.out.println("Send message to " + destination);
+		pt.sendBody(destination, body);
+		return ResponseEntity.ok(HttpStatus.OK);*/
+   
+   
+   
+   
+  //get a book by id
    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
-   public ResponseEntity<Book> get(@PathVariable("id") long id) {
-      Book book = bookService.get(id);
+   public ResponseEntity<Book> get(@PathVariable("id") long id) throws Exception{
+      Book book = bookService.getBook(id);
       return ResponseEntity.ok().body(book);
    }
 
-   /*---get all books---*/
+   //get all books
    @RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
-   public ResponseEntity<List<Book>> list() {
-      List<Book> books = bookService.list();
+   public ResponseEntity<List<Book>> list() throws Exception{
+      List<Book> books = bookService.listAllBooks();
       return ResponseEntity.ok().body(books);
    }
 
-   /*---Update a book by id---*/
+  //Update a book by id
    @RequestMapping(value = "/updateBook/{id}", method = RequestMethod.PUT)
-   public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Book book) {
+   public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Book book) throws Exception {
       bookService.update(id, book);
       return ResponseEntity.ok().body("Book has been updated successfully.");
    }
 
-   /*---Delete a book by id---*/
+   //Delete a book by id
    @RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.DELETE)
-   public ResponseEntity<?> delete(@PathVariable("id") long id) {
+   public ResponseEntity<?> delete(@PathVariable("id") long id) throws Exception{
       bookService.delete(id);
       return ResponseEntity.ok().body("Book has been deleted successfully.");
    }

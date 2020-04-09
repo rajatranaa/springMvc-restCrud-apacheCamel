@@ -1,5 +1,7 @@
 package com.bookStore.restCrud.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,10 +11,9 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name="BOOK")
-public class Book {
+public class Book implements Serializable  {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = -460917901673850042L;	
 	
    @Id
    @GeneratedValue(strategy = GenerationType.IDENTITY)

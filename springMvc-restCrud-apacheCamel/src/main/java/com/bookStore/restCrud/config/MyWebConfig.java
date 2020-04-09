@@ -1,11 +1,10 @@
 package com.bookStore.restCrud.config;
 
-import org.springframework.context.MessageSource;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.support.ResourceBundleMessageSource;
-import org.springframework.core.Ordered;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
@@ -16,13 +15,8 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = "com.bookStore.restCrud")
+@PropertySource("classpath:application.properties")
 public class MyWebConfig implements WebMvcConfigurer {
-	
-	@Override
-	public void addResourceHandlers(final ResourceHandlerRegistry registry) {
-	    registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-	    registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
-	}
 	
 	
 	@Bean
@@ -35,11 +29,8 @@ public class MyWebConfig implements WebMvcConfigurer {
 		return viewResolver;
 	}
 	
-	@Bean
-	public MessageSource messageSource() {
-	    ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
-	    messageSource.setBasename("messages");
-	    return messageSource;
+	public void addResourceHandlers(ResourceHandlerRegistry registry) {
+		registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
 	}
 }
 

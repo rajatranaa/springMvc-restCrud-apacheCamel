@@ -6,9 +6,9 @@ import com.bookStore.restCrud.model.Book;
 
 public interface BookService {
 
-   long save(Book book);
-   Book get(long id);
-   List<Book> list();
-   void update(long id, Book book);
-   void delete(long id);
+   long save(Book book) throws Exception;
+   Book getBook(long id) throws Exception;
+   List<Book> listAllBooks() throws Exception;
+   void update(long id, Book book) throws Exception;
+   void delete(long id) throws Exception;
 }
