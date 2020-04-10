@@ -18,7 +18,7 @@
 
 <br>GET :- http://localhost:8080/getAllBooks
 
-<br>PUT :- http://localhost:8080/updateBook/1
+<br>PUT :- http://localhost:8080/updateBook/
 
 <br>DELETE :- http://localhost:8080/deleteBook/1
 </h4>

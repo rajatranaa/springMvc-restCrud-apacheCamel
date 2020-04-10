@@ -23,7 +23,7 @@ public class BookDaoImp implements BookDao {
 
 
    @Transactional(rollbackFor = { Exception.class })
-   public long save(Book book) throws Exception {
+   public long saveBook(Book book) throws Exception {
 	   
 	   Session session = this.sessionFactory.getCurrentSession();
 	   try {
@@ -38,7 +38,7 @@ public class BookDaoImp implements BookDao {
  
 
    @Transactional(rollbackFor = { Exception.class })
-   public Book get(long id) throws Exception{
+   public Book getBookById(long id) throws Exception{
 	   Session session = this.sessionFactory.getCurrentSession();
 	   Book book = new Book();
 	   try {
@@ -53,7 +53,7 @@ public class BookDaoImp implements BookDao {
 
 
    @Transactional(rollbackFor = { Exception.class })
-   public List<Book> list() throws Exception{
+   public List<Book> getAllBooks() throws Exception{
       Session session = sessionFactory.getCurrentSession();
       CriteriaBuilder cb = session.getCriteriaBuilder();
       CriteriaQuery<Book> cq = cb.createQuery(Book.class);
@@ -64,7 +64,7 @@ public class BookDaoImp implements BookDao {
    }
 
    @Transactional(rollbackFor = { Exception.class })
-   public void update(long id, Book book) throws Exception{
+   public void updateBookById(long id, Book book) throws Exception{
       Session session = sessionFactory.getCurrentSession();
       Book book2 = session.byId(Book.class).load(id);
       book2.setTitle(book.getTitle());
@@ -74,7 +74,7 @@ public class BookDaoImp implements BookDao {
 
 
    @Transactional(rollbackFor = { Exception.class })
-   public void delete(long id) throws Exception{
+   public void deleteBookById(long id) throws Exception{
 	   Session session = this.sessionFactory.getCurrentSession();
       try {
 	    	  if(id != 0) {

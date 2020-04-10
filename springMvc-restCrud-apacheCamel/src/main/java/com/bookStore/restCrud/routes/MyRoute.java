@@ -18,13 +18,13 @@ public class MyRoute extends RouteBuilder {
 			}
 		}).to("activemq:queue:cm.create");
 
-		/*from("direct:cm.update").process(new Processor() {
+		from("direct:cm.update").process(new Processor() {
 			public void process(Exchange exchange) throws Exception {
 				exchange.getOut().setHeader("JMSCorrelationID", "updatec");
 				exchange.getOut().setBody(exchange.getIn().getBody());
 			}
 		}).to("activemq:queue:cm.update");
-*/
+		
 		from("direct:cm.delete").process(new Processor() {
 			public void process(Exchange exchange) throws Exception {
 				exchange.getOut().setHeader("JMSCorrelationID", "deletec");

@@ -18,27 +18,27 @@ public class BookServiceImp implements BookService {
    BookDao bookDao;
 
    
-   public long save(Book book) throws Exception{
-      return bookDao.save(book);
+   public long saveBook(Book book) throws Exception{
+      return bookDao.saveBook(book);
    }
 
 
-   public Book getBook(long id) throws Exception{
-      return bookDao.get(id);
+   public Book getBookById(long id) throws Exception{
+      return bookDao.getBookById(id);
    }
 
 
-   public List<Book> listAllBooks() throws Exception{
-      return bookDao.list();
+   public List<Book> getAllBooks() throws Exception{
+      return bookDao.getAllBooks();
    }
 
-   public void update(long id, Book book) throws Exception{
-      bookDao.update(id, book);
+   public void updateBookById(long id, Book book) throws Exception{
+      bookDao.updateBookById(id, book);
    }
 
  
-   public void delete(long id) throws Exception{
-      bookDao.delete(id);
+   public void deleteBookById(long id) throws Exception{
+      bookDao.deleteBookById(id);
    }
 
 }

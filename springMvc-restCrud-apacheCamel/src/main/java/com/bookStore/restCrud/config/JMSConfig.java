@@ -1,7 +1,6 @@
 package com.bookStore.restCrud.config;
 
 
-import java.util.Arrays;
 
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.apache.activemq.camel.component.ActiveMQComponent;
@@ -17,13 +16,12 @@ import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 public class JMSConfig {	
 	
 	private static final String URL = "vm://localhost?broker.persistent=false";
-//	private static final String URL = "tcp://localhost:8080";
+//	private static final String DEFAULT_BROKER_URL = "tcp://localhost:61616";
 //	private static final String URL = "http://localhost:8080";
 	
 	private static final String USERNAME = "admin";
 	private static final String PASSWORD = "admin";
 	
-//	ActiveMQConnectionFactory cf = new ActiveMQConnectionFactory("vm://localhost?create=false");
 	
 	@Bean
 	public ActiveMQConnectionFactory connectionFactory() {
@@ -31,19 +29,13 @@ public class JMSConfig {
 		connectionFactory.setBrokerURL(URL);
 		connectionFactory.setUserName(USERNAME);
 		connectionFactory.setPassword(PASSWORD);
-		connectionFactory.setTrustedPackages(Arrays.asList("com.bookStore.restCrud"));
+	//	connectionFactory.setTrustedPackages(Arrays.asList("org.api","java.util","com.bookStore.restCrud.model.Book"));
+		connectionFactory.setTrustAllPackages(true);
+	//	connectionFactory.setTrustedPackages(Arrays.asList("com.bookStore.restCrud.config"));
 		
 		return connectionFactory;
 	}
 	
-//	@Bean
-//	public JmsComponent jmsComponent() {		
-//		JmsComponent jmsComponent = new JmsComponent();
-//		jmsComponent.setConnectionFactory(connectionFactory());
-//		jmsComponent.setExplicitQosEnabled(true);
-//		jmsComponent.setTimeToLive(3*60*60*1000); 
-//		return jmsComponent;
-//	}
 	
 	@Bean
 	public ActiveMQComponent activeMQComponent() {

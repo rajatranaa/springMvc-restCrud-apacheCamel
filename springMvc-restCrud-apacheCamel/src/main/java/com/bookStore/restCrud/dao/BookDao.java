@@ -6,14 +6,15 @@ import com.bookStore.restCrud.model.Book;
 
 public interface BookDao {
 
-   long save(Book book) throws Exception;
+   long saveBook(Book book) throws Exception;
 
-   Book get(long id) throws Exception;
+   Book getBookById(long id) throws Exception;
 
-   List<Book> list() throws Exception;
+   List<Book> getAllBooks() throws Exception;
 
-   void update(long id, Book book) throws Exception;
+   void updateBookById(long id, Book book) throws Exception;
 
-   void delete(long id) throws Exception;
+   void deleteBookById(long id) throws Exception;
+
 
 }

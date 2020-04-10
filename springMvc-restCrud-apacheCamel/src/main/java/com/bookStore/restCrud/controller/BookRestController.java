@@ -46,7 +46,7 @@ public class BookRestController {
    @RequestMapping(value = "/book", method = RequestMethod.POST)
    public ResponseEntity<HttpStatus> save(@RequestBody Book book, HttpServletRequest req) throws Exception{
 	   ProducerTemplate pt = camelContext.createProducerTemplate();
-	   System.out.println("Creating Switch...");
+	   System.out.println("on the way.....");
 		String destination = "direct:cm.create";
 		System.out.println("Send message to " + destination);
 		
@@ -61,44 +61,43 @@ public class BookRestController {
    //   long id = bookService.save(book);
    //   return ResponseEntity.ok().body("New Book saved with ID:" + id);
    }
-
-  /* @RequestMapping(value = "switch", method = RequestMethod.POST)
-	public ResponseEntity<HttpStatus> createSwitch(@RequestBody Switch body, HttpServletRequest req) {
-		ProducerTemplate pt = camelContext.createProducerTemplate();
-		System.out.println("Creating Switch...");
-		String destination = "direct:cm.create";
-		System.out.println("Send message to " + destination);
-		pt.sendBody(destination, body);
-		return ResponseEntity.ok(HttpStatus.OK);*/
-   
-   
-   
+ 
    
   //get a book by id
    @RequestMapping(value = "/book/{id}", method = RequestMethod.GET)
    public ResponseEntity<Book> get(@PathVariable("id") long id) throws Exception{
-      Book book = bookService.getBook(id);
+      Book book = bookService.getBookById(id);
       return ResponseEntity.ok().body(book);
    }
 
    //get all books
    @RequestMapping(value = "/getAllBooks", method = RequestMethod.GET)
    public ResponseEntity<List<Book>> list() throws Exception{
-      List<Book> books = bookService.listAllBooks();
+      List<Book> books = bookService.getAllBooks();
       return ResponseEntity.ok().body(books);
    }
 
-  //Update a book by id
-   @RequestMapping(value = "/updateBook/{id}", method = RequestMethod.PUT)
-   public ResponseEntity<?> update(@PathVariable("id") long id, @RequestBody Book book) throws Exception {
-      bookService.update(id, book);
-      return ResponseEntity.ok().body("Book has been updated successfully.");
+  //Update a book
+   @RequestMapping(value = "/updateBook", method = RequestMethod.PUT)
+   public ResponseEntity<?> update(@RequestBody Book book) throws Exception {
+	   ProducerTemplate pt = camelContext.createProducerTemplate();
+	   String destination = "direct:cm.update";
+		System.out.println("Send message to " + destination);
+		pt.sendBody(destination, book);
+     
+		return ResponseEntity.ok().body("Book has been updated successfully.");
    }
 
    //Delete a book by id
    @RequestMapping(value = "/deleteBook/{id}", method = RequestMethod.DELETE)
    public ResponseEntity<?> delete(@PathVariable("id") long id) throws Exception{
-      bookService.delete(id);
+	   ProducerTemplate pt = camelContext.createProducerTemplate();
+	   String destination = "direct:cm.delete";
+		System.out.println("Send message to " + destination);
+		pt.sendBody(destination, id);
+		
       return ResponseEntity.ok().body("Book has been deleted successfully.");
    }
 }
+
+
