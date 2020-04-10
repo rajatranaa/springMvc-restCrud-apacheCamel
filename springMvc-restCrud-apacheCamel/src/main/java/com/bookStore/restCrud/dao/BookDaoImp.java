@@ -65,11 +65,16 @@ public class BookDaoImp implements BookDao {
 
    @Transactional(rollbackFor = { Exception.class })
    public void updateBookById(long id, Book book) throws Exception{
-      Session session = sessionFactory.getCurrentSession();
-      Book book2 = session.byId(Book.class).load(id);
-      book2.setTitle(book.getTitle());
-      book2.setAuthor(book.getAuthor());
-      session.flush();
+	   Session session = sessionFactory.getCurrentSession();
+	   
+	   try {
+		      Book book2 = session.byId(Book.class).load(id);
+		      book2.setTitle(book.getTitle());
+		      book2.setAuthor(book.getAuthor());
+		      session.flush(); 
+	       }catch(Exception e) {
+		   e.printStackTrace();
+	   }
    }
 
 

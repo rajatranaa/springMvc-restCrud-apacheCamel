@@ -49,11 +49,11 @@
 			</dependency>
 			
 			<!-- https://mvnrepository.com/artifact/org.springframework.data/spring-data-jpa -->
-<dependency>
-    <groupId>org.springframework.data</groupId>
-    <artifactId>spring-data-jpa</artifactId>
-    <version>2.2.6.RELEASE</version>
-</dependency>
+			<dependency>
+			    <groupId>org.springframework.data</groupId>
+			    <artifactId>spring-data-jpa</artifactId>
+			    <version>2.2.6.RELEASE</version>
+			</dependency>
 
 			
 			<!--     Spring Security starts           -->
@@ -120,68 +120,62 @@
 			   <version>8.0.16</version>
 			</dependency>
 
-            <dependency>
-			   <groupId>org.mongodb</groupId>
-			   <artifactId>mongo-java-driver</artifactId>
-			   <version>3.7.1</version>
-		    </dependency>
-
 
 <!--        Extra dependencies              -->
 
-<dependency>
+           <dependency>
 			<groupId>com.fasterxml.jackson.core</groupId>
 			<artifactId>jackson-databind</artifactId>
 			<version>2.9.7</version>
-		</dependency>
+		  </dependency>
 
-		<dependency>
-			<groupId>joda-time</groupId>
-			<artifactId>joda-time</artifactId>
-			<version>2.9.9</version>
-		</dependency>
+			 <dependency>
+				<groupId>joda-time</groupId>
+				<artifactId>joda-time</artifactId>
+				<version>2.9.9</version>
+			</dependency>
 
 <!--               Apache camel            -->
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-core</artifactId>
-			<version>2.22.2</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-spring-javaconfig</artifactId>
-			<version>2.22.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.camel</groupId>
-			<artifactId>camel-jms</artifactId>
-			<version>2.22.2</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-camel</artifactId>
-			<version>5.15.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-broker</artifactId>
-			<version>5.15.7</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-client</artifactId>
-			<version>5.15.7</version>
-		</dependency>
-		<dependency>
-			<groupId>org.apache.activemq</groupId>
-			<artifactId>activemq-pool</artifactId>
-			<version>5.15.7</version>
-		</dependency>
+		
+				<dependency>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-core</artifactId>
+					<version>2.22.2</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-spring-javaconfig</artifactId>
+					<version>2.22.2</version>
+				</dependency>
+		
+				<dependency>
+					<groupId>org.apache.camel</groupId>
+					<artifactId>camel-jms</artifactId>
+					<version>2.22.2</version>
+				</dependency>
+		
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-camel</artifactId>
+					<version>5.15.7</version>
+				</dependency>
+		
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-broker</artifactId>
+					<version>5.15.7</version>
+				</dependency>
+		
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-client</artifactId>
+					<version>5.15.7</version>
+				</dependency>
+				<dependency>
+					<groupId>org.apache.activemq</groupId>
+					<artifactId>activemq-pool</artifactId>
+					<version>5.15.7</version>
+				</dependency>
 
 				 <dependency>
 		      <groupId>junit</groupId>
